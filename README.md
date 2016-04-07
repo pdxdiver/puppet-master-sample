@@ -37,7 +37,8 @@ In short, I chose to use an approach that provides a flexible framework for
 managing configurations that allows "roles" to be assigned to nodes. I believe this
 approach provides an extensible model that reflects real world scenarios
 
-### hiera.yaml - Hiera Configuration - Defines Hiera data source and hierarchy
+### hiera.yaml
+Hiera configuration that defines data source and hierarchy
 ```
 ---
 :backends:
@@ -50,7 +51,8 @@ approach provides an extensible model that reflects real world scenarios
   - common
 ```
 
-### node01.example.com.yaml - Hiera that defines the node's config options and behavior
+### node01.example.com.yaml
+Hiera data that defines the node's config options and behavior
 ```
 ---
 roles:
