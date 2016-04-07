@@ -22,7 +22,7 @@ sudo /opt/puppetlabs/bin/puppet cert list --all # check for signed cert(s)
 ```
 6 - Execute the rake file to test the config
 ```Shell
-rake -f /vagrant/Rakefile # Cleans up, runs the agent and tests the web server
+rake -f /vagrant/rakefile # Cleans up, runs the agent and tests the web server
 ```
 
 ## Assumptions
