@@ -6,7 +6,7 @@ task :default => 'node_test'
 
 desc "Test the installation"
 task :test_webserver do
-  puts "*** Installation Test =>Testing web server"
+  puts "*** Installation Test => Testing web server".blue
   if (system("wget_output=$(wget -q 'http://localhost:8000')")) then
       puts "*** Test Pass => Web server installed and configured correctly".blue
   else
@@ -16,7 +16,7 @@ end
 
 desc "Delete the Nginix installation"
 task :clean_node do
-  puts "*** Clean Up => Deleting Ngnix install and deleting web directory"
+  puts "*** Clean Up => Deleting Ngnix install and deleting web directory".blue
   if system("sudo apt-get -yq purge nginx nginx-common") then
       puts "*** Clean Up => Ngnix installation removed".blue
       system("sudo rm -rf /opt/www/")
