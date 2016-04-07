@@ -112,8 +112,8 @@ class profiles::nginx {
 ```
 ## Additional Solution Elements
 
-### JSON Configuration File
-The Vagrantfile retrieves multiple VM configurations from a separate `nodes.json` file.
+### nodes.json
+The Vagrantfile retrieves multiple VM configurations defined in JSON.
 
 ### bootstrap-master.sh & bootstrap-node.sh
 First time startup scripts to prepare each server
