@@ -1,28 +1,28 @@
 ## Instructions for executing the solution
 
 1 - Clone the repository
-```
+```Shell
 https://github.com/pdxdiver/puppet-master-sample.git
 ```
 2 - Verify Puppetmaster is up (puppet.example.com)
-```
+```Shell
 vagrant up # brings up all VMs
 vagrant ssh puppet.example.com
 sudo service puppetserver status
 ```
 3 - Initiate certificate signing request (node01.example.com)
-```
+```Shell
 vagrant ssh node01.example.com
 sudo puppet agent --test --waitforcert=60 # initiate certificate signing request (CSR)
 ```
 4 - Sign the certs on Puppet Master server (puppet.example.com)
-```
+```Shell
 sudo /opt/puppetlabs/bin/puppet cert list # should see 'node01.example.com' cert waiting for signature
 sudo /opt/puppetlabs/bin/puppet cert sign --all # sign the agent node(s) cert(s)
 sudo /opt/puppetlabs/bin/puppet cert list --all # check for signed cert(s)
 ```
 6 - Execute the rake file to test the config
-```
+```Shell
 rake -f /vagrant/rakefile
 ```
 
@@ -33,7 +33,7 @@ approach provides an extensible model that reflects real world scenarios
 
 ### hiera.yaml
 Hiera configuration that defines data source and hierarchy
-```
+```YAML
 ---
 :backends:
   - yaml
@@ -47,7 +47,7 @@ Hiera configuration that defines data source and hierarchy
 
 ### node01.example.com.yaml
 Hiera data that defines the node's config options and behavior
-```
+```YAML
 ---
 roles:
   - roles::www
@@ -67,27 +67,24 @@ nginx::nginx_vhosts:
     www_root: "%{hiera('http.www_home_dir')}"
     listen_port: "%{hiera('http.port')}"
 ```
-
 ###  site.pp
 Instruct puppet to use the "role" classes
-```
+```Puppet
 node default {
   hiera_include('roles')
 }
 ```
-
-###  www.pp
+### <span>www.pp</span>
 Define the profiles used in the www role
-```
+```Puppet
 class roles::www{
   include profiles::nginx
   include profiles::http_resources
 }
 ```
-
 ###  http_resource.pp
 Define directory and file resources. Ensure we have the latest index.html
-```
+```Puppet
 class profiles::http_resources{
   $http = hiera_hash('http')
 
@@ -101,16 +98,14 @@ class profiles::http_resources{
   }
 }
 ```
-
 ###  nginx.pp
 Install ngnix
-```
+```Puppet
 class profiles::nginx {
   class{ '::nginx':
   }
 }
 ```
-
 ## Additional Solution Elements
 
 ### JSON Configuration File
