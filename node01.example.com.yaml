@@ -1,3 +1,4 @@
+# The Hiera configuration data for the node
 ---
 roles:
   - roles::www

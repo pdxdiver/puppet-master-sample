@@ -1,34 +1,39 @@
+# Test the nginix installation
+
+require 'colorize'
 
 task :default => 'node_test'
 
-desc "Unit Test: Test the web server"
+desc "Test the installation"
 task :test_webserver do
-  puts "=>Testing web server"
+  puts "*** Installation Test =>Testing web server"
   if (system("wget_output=$(wget -q 'http://localhost:8000')")) then
-      puts "Test Pass => Web server installed and configured correctly"
+      puts "*** Test Pass => Web server installed and configured correctly".blue
   else
-      puts "Test Fail => Web server installed and configured correctly"
+      puts "*** Test Fail => Web server installation or resource problem".red
   end
 end
 
 desc "Delete the Nginix installation"
 task :clean_node do
-  puts "Clean Up => Deleting Ngnix install and deleting web directory"
+  puts "*** Clean Up => Deleting Ngnix install and deleting web directory"
   if system("sudo apt-get -yq purge nginx nginx-common") then
-      puts ("Clean Up => Ngnix installation removed")
+      puts "*** Clean Up => Ngnix installation removed".blue
       system("sudo rm -rf /opt/www/")
+      puts "*** Clean Up => Web root directories removed".blue
   else
-      puts ("Clean Up => Clean up failed")
+      puts "Clean Up => Clean up failed".red
   end
 end
 
 desc "Run the puppet agent"
 task :run_agent do
-  puts "Puppet Run => Running the agent"
+  puts "*** Puppet Run => Running the agent".blue
   system(" sudo /opt/puppetlabs/bin/puppet agent --test")
+  puts "*** Puppet Run => Agent run complete".blue
 end
 
 desc "Clean Up and Test"
 task :node_test => [:clean_node, :run_agent, :test_webserver] do
-  puts "Test Node=> Test completed"
+  puts "*** Test Node => Test completed".blue
 end

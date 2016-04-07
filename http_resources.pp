@@ -1,3 +1,4 @@
+# Defines file, directory and content resources
 class profiles::http_resources{
   $http = hiera_hash('http')
 

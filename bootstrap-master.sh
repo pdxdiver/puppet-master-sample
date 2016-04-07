@@ -26,9 +26,6 @@ echo "192.168.32.10   funkenstein.example.com  funkenstein" | sudo tee --append 
 # Add optional alternate DNS names to /etc/puppet/puppet.conf
 sudo sed -i 's/.*\[main\].*/&\ndns_alt_names = puppet,puppet.example.com/' /etc/puppetlabs/puppet/puppet.conf
 
-# adds example.com tld to autosign white list
-sudo echo "*.example.com" >/etc/puppet/autosign.conf
-
 echo "# Install puppet modules we will be using"
 sudo $puppet_bin/puppet module install jfryman-nginx --modulepath $puppet_env/modules
 
@@ -40,12 +37,12 @@ echo "# create directory for nodes"
 sudo mkdir -p $puppet_env/hieradata/nodes
 
 # symlink manifest and yaml configs from Vagrant synced folder location
-echo "# Symlink for site.pp" |sudo ln -s /vagrant/site.pp $puppet_env/manifests/site.ppi
+echo "# Symlink for site.pp" |sudo ln -s /vagrant/site.pp $puppet_env/manifests/site.pp
 echo "# Delete stock hiera config" |sudo rm $hiera_dir/hiera.yaml
 echo "# Symlink to our custom hiera config" |sudo ln -s /vagrant/hiera.yaml $hiera_dir/hiera.yaml
 echo "# Symlink to www manifest" |sudo ln -s /vagrant/www.pp $puppet_env/modules/roles/manifests/www.pp
 echo "# Symlink to http resources manifest" |sudo ln -s /vagrant/http_resources.pp $puppet_env/modules/profiles/manifests/http_resources.pp
-echo "# Symlink to ngnix manifest" |sudo ln -s /vagrant/nginix.pp $puppet_env/modules/profiles/manifests/nginx.pp
+echo "# Symlink to ngnix manifest" |sudo ln -s /vagrant/nginx.pp $puppet_env/modules/profiles/manifests/nginx.pp
 echo "# Symlink to node01 yaml config" |sudo ln -s /vagrant/node01.example.com.yaml $puppet_env/hieradata/nodes/node01.example.com.yaml
 echo "# Symlink to common yaml config" |sudo ln -s /vagrant/common.yaml $puppet_env/hieradata/common.yaml
 # Start puppetserver

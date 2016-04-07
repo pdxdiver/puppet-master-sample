@@ -15,8 +15,8 @@
     sudo apt-get update -yq
     sudo apt-get install -yq ruby2.1
     sudo update-alternatives --set ruby /usr/bin/ruby2.1
-    sudo apt-get install ruby-switch
     sudo gem install rake
+    sudo gem install colorize
 
     sudo /opt/puppetlabs/bin/puppet resource cron puppet-agent ensure=present user=root minute=30 \
     command='/opt/puppetlabs/bin/puppet agent --onetime --no-daemonize --splay'
@@ -34,7 +34,3 @@
     echo "" && echo "[agent]\nserver=puppet" | sudo tee --append /etc/puppetlabs/puppet/puppet.conf 2> /dev/null
 
     sudo /opt/puppetlabs/bin/puppet agent --enable
-
-    #Execute the Rake file
-    echo "Do a Puppet run"
-    sudo /opt/puppetlabs/bin/puppet agent --test --waitforcert=10

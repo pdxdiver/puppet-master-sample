@@ -1,5 +1,5 @@
 ## Instructions for executing the solution
-
+require 'colorize'
 1 - Clone the repository
 ```Shell
 https://github.com/pdxdiver/puppet-master-sample.git
@@ -7,13 +7,13 @@ https://github.com/pdxdiver/puppet-master-sample.git
 2 - Verify Puppetmaster is up (puppet.example.com)
 ```Shell
 vagrant up # brings up all VMs
-vagrant ssh puppet.example.com
-sudo service puppetserver status
+vagrant ssh puppet.example.com # Log into puppet master server
+sudo service puppetserver status # Make sure puppet master is up
 ```
 3 - Initiate certificate signing request (node01.example.com)
 ```Shell
 vagrant ssh node01.example.com
-sudo puppet agent --test --waitforcert=60 # initiate certificate signing request (CSR)
+sudo /opt/puppetlabs/bin/puppet agent --test --waitforcert=60 # initiate certificate signing request (CSR)
 ```
 4 - Sign the certs on Puppet Master server (puppet.example.com)
 ```Shell
@@ -23,13 +23,18 @@ sudo /opt/puppetlabs/bin/puppet cert list --all # check for signed cert(s)
 ```
 6 - Execute the rake file to test the config
 ```Shell
-rake -f /vagrant/rakefile
+rake -f /vagrant/Rakefile # Cleans up, runs the agent and tests the web server
 ```
 
-## My solution
-In short, I chose to use an approach that provides a flexible framework for
-managing configurations that allows "roles" to be assigned to nodes. I believe this
-approach provides an extensible model that reflects real world scenarios
+## Assumptions
+This solution is stand alone and can be executed from any workstation with the following installed:
+- [Vagrant](https://www.vagrantup.com/downloads.html)
+- [Virtualbox](https://www.vagrantup.com/downloads.html) or
+- [VMware Fusion](https://www.vmware.com/go/try-fusion-en) or
+- [VMware Workstation](http://www.vmware.com/products/workstation/)
+
+## The solution
+This solution demonstrates a multi-server puppet master / agent node configuration. It provides a flexible framework for managing configurations that allows "roles" to be assigned to nodes. It provides an extensible model that reflects real world scenarios.
 
 ### hiera.yaml
 Hiera configuration that defines data source and hierarchy
