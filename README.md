@@ -1,5 +1,4 @@
 ## Instructions for executing the solution
-require 'colorize'
 1 - Clone the repository
 ```Shell
 https://github.com/pdxdiver/puppet-master-sample.git
