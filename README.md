@@ -21,12 +21,6 @@ sudo /opt/puppetlabs/bin/puppet cert list # should see 'node01.example.com' cert
 sudo /opt/puppetlabs/bin/puppet cert sign --all # sign the agent node(s) cert(s)
 sudo /opt/puppetlabs/bin/puppet cert list --all # check for signed cert(s)
 ```
-5 - Sign the cert (node01.example.com)
-```
-sudo /opt/puppetlabs/bin/puppet cert list # should see 'node01.example.com' cert waiting for signature
-sudo /opt/puppetlabs/bin/puppet cert sign --all # sign the agent node(s) cert(s)
-sudo /opt/puppetlabs/bin/puppet list --all # check for signed cert(s)
-```
 6 - Execute the rake file to test the config
 ```
 rake -f /vagrant/rakefile
