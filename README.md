@@ -119,5 +119,5 @@ The Vagrantfile retrieves multiple VM configurations defined in JSON.
 First time startup scripts to prepare each server
 
 ## Sources of inspiration
-1. [Bootstrapping Puppet Master Multi-node](http://wp.me/p1RD28-1kX)
-2. [Deploying nginix with Puppet](https://blog.serverdensity.com/deploying-nginx-with-puppet/)
+- [Bootstrapping Puppet Master Multi-node](http://wp.me/p1RD28-1kX)
+- [Deploying nginix with Puppet](https://blog.serverdensity.com/deploying-nginx-with-puppet/)
