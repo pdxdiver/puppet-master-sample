@@ -1,0 +1,18 @@
+---
+roles:
+  - roles::www
+
+http:
+  vdomain: funkenstein.example.com
+  port: 8000
+  www_home_dir: /opt/www/
+  index_file: index.html
+  home_page_src: http://raw.githubusercontent.com/puppetlabs/exercise-webpage/master/index.html
+
+nginx::config::vhost_purge: true
+nginx::config::confd_purge: true
+nginx::nginx_vhosts:
+ "%{hiera('http.vdomain')}":
+    ensure: present
+    www_root: "%{hiera('http.www_home_dir')}"
+    listen_port: "%{hiera('http.port')}"

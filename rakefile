@@ -1,0 +1,34 @@
+
+task :default => 'node_test'
+
+desc "Unit Test: Test the web server"
+task :test_webserver do
+  puts "=>Testing web server"
+  if (system("wget_output=$(wget -q 'http://localhost:8000')")) then
+      puts "Test Pass => Web server installed and configured correctly"
+  else
+      puts "Test Fail => Web server installed and configured correctly"
+  end
+end
+
+desc "Delete the Nginix installation"
+task :clean_node do
+  puts "Clean Up => Deleting Ngnix install and deleting web directory"
+  if system("sudo apt-get -yq purge nginx nginx-common") then
+      puts ("Clean Up => Ngnix installation removed")
+      system("sudo rm -rf /opt/www/")
+  else
+      puts ("Clean Up => Clean up failed")
+  end
+end
+
+desc "Run the puppet agent"
+task :run_agent do
+  puts "Puppet Run => Running the agent"
+  system(" sudo /opt/puppetlabs/bin/puppet agent --test")
+end
+
+desc "Clean Up and Test"
+task :node_test => [:clean_node, :run_agent, :test_webserver] do
+  puts "Test Node=> Test completed"
+end
