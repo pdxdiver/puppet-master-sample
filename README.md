@@ -1,21 +1,21 @@
 ## Instructions for executing the solution
 
-1. Clone the repository
+1 - Clone the repository
 ```
 https://github.com/pdxdiver/puppet-master-sample.git
 ```
-2. Verify Puppetmaster is up (puppet.example.com)
+2 - Verify Puppetmaster is up (puppet.example.com)
 ```
 vagrant up # brings up all VMs
 vagrant ssh puppet.example.com
 sudo service puppetserver status
 ```
-3. Initiate certificate signing request (node01.example.com)
+3 - Initiate certificate signing request (node01.example.com)
 ```
 vagrant ssh node01.example.com
 sudo puppet agent --test --waitforcert=60 # initiate certificate signing request (CSR)
 ```
-4. Sign the certs on Puppet Master server (puppet.example.com)
+4 - Sign the certs on Puppet Master server (puppet.example.com)
 ```
 sudo /opt/puppetlabs/bin/puppet cert list # should see 'node01.example.com' cert waiting for signature
 sudo /opt/puppetlabs/bin/puppet cert sign --all # sign the agent node(s) cert(s)
@@ -27,7 +27,7 @@ sudo /opt/puppetlabs/bin/puppet cert list # should see 'node01.example.com' cert
 sudo /opt/puppetlabs/bin/puppet cert sign --all # sign the agent node(s) cert(s)
 sudo /opt/puppetlabs/bin/puppet list --all # check for signed cert(s)
 ```
-6. Execute the rake file to test the config
+6 - Execute the rake file to test the config
 ```
 rake -f /vagrant/rakefile
 ```
