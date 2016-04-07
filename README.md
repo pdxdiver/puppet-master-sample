@@ -2,7 +2,7 @@
 
 1. Clone the repository
 ```
-git clone 
+https://github.com/pdxdiver/puppet-master-sample.git
 ```
 2. Verify Puppetmaster is up (puppet.example.com)
 ```
