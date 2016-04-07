@@ -72,14 +72,16 @@ nginx::nginx_vhosts:
     listen_port: "%{hiera('http.port')}"
 ```
 
-###  site.pp - Instruct puppet to use the "role" classes
+###  site.pp
+Instruct puppet to use the "role" classes
 ```
 node default {
   hiera_include('roles')
 }
 ```
 
-###  www.pp - Define the profiles used in the www role
+###  www.pp
+Define the profiles used in the www role
 ```
 class roles::www{
   include profiles::nginx
@@ -87,7 +89,8 @@ class roles::www{
 }
 ```
 
-###  http_resource.pp - Define directory and file resources. Ensure we have the latest index.html
+###  http_resource.pp
+Define directory and file resources. Ensure we have the latest index.html
 ```
 class profiles::http_resources{
   $http = hiera_hash('http')
@@ -103,7 +106,8 @@ class profiles::http_resources{
 }
 ```
 
-###  nginx.pp - Install ngnix
+###  nginx.pp
+Install ngnix
 ```
 class profiles::nginx {
   class{ '::nginx':
@@ -113,12 +117,12 @@ class profiles::nginx {
 
 ## Additional Solution Elements
 
-#### JSON Configuration File
+### JSON Configuration File
 The Vagrantfile retrieves multiple VM configurations from a separate `nodes.json` file.
 
-#### bootstrap-master.sh & bootstrap-node.sh
+### bootstrap-master.sh & bootstrap-node.sh
 First time startup scripts to prepare each server
 
-### Sources of inspiration
+## Sources of inspiration
 1. [Bootstrapping Puppet Master Multi-node](http://wp.me/p1RD28-1kX)
 2. [Deploying nginix with Puppet](https://blog.serverdensity.com/deploying-nginx-with-puppet/)
