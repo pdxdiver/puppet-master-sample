@@ -3,7 +3,7 @@
 ```Shell
 https://github.com/pdxdiver/puppet-master-sample.git
 ```
-2 - Verify Puppetmaster is up (puppet.example.com)
+2 - Bootstrap Puppet VMs & Verify Puppet Master is up (puppet.example.com)
 ```Shell
 vagrant up # brings up all VMs
 vagrant ssh puppet.example.com # Log into puppet master server
