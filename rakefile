@@ -22,7 +22,7 @@ task :clean_node do
       system("sudo rm -rf /opt/www/")
       puts "*** Clean Up => Web root directories removed".blue
   else
-      puts "Clean Up => Clean up failed".red
+      puts "*** Clean Up => Clean up failed".red
   end
 end
 
